@@ -9,11 +9,13 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasTeams;
 
 class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
+    use HasTeams;
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;

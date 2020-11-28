@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CurriculoController;
-
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +16,8 @@ use App\Http\Controllers\CurriculoController;
 */
 
 Route::get('/', [HomeController::class, 'show'])->name('index');
+
+Route::get('/admin',[AdminController::class,'show'])->name('admin');
 
 Route::get('/curriculo', [CurriculoController::class, 'show'])->name('index');
 Route::post('/curriculo', [CurriculoController::class, 'edit'])->name('index');
