@@ -10,13 +10,16 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
+        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
         @livewireStyles
         <link rel="icon" href="/img/flaticon-180x180.png" />
         <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>    
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -33,11 +36,17 @@
             <main>
                 {{ $slot }}
             </main>
-            
+
         </div>
 
         @stack('modals')
 
         @livewireScripts
+        <script src="//code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
+        <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="//cdn.datatables.net/1.10.22/js/dataTables.jqueryui.min.js" type="text/javascript"></script>
+        <script src="//cdn.datatables.net/scroller/2.0.3/js/dataTables.scroller.min.js" type="text/javascript"></script>
+
+       @yield('scripts')
     </body>
 </html>

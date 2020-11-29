@@ -17,7 +17,12 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', [HomeController::class, 'show'])->name('index');
 
-Route::get('/admin',[AdminController::class,'show'])->name('admin');
+Route::get('/admin',[AdminController::class,'show'])->name('curriculos');
+Route::get('/admin/perfis',[AdminController::class,'perfis'])->name('admin.perfis');
+Route::post('/admin/users',[AdminController::class,'users'])->name('admin.users');
+Route::get('/admin/curriculo/{id}',[AdminController::class,'curriculo'])->name('admin.curriculo');
+Route::post('/admin/upperAdmin/{id}',[AdminController::class,'upperAdmin'])->name('admin.upperAdmin');
+
 
 Route::get('/curriculo', [CurriculoController::class, 'show'])->name('index');
 Route::post('/curriculo', [CurriculoController::class, 'edit'])->name('index');

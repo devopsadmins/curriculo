@@ -30,8 +30,8 @@ class CurriculoController extends Controller {
     public function update(Request $request, $id) {
         $curriculo = Curriculo::findOrfail($id);
         $curriculo->update([
-            'nome' => $request->nome,
-            'email' => $request->email,
+            'nome_curriculo' => $request->nome,
+            'email_curriculo' => $request->email,
             'telefone' => $request->telefone,
             'profissao' => $request->profissao,
             'experiencia' => $request->experiencia,

@@ -12,9 +12,10 @@
 
                 <!-- Navigation Links -->
                 @if (Auth::user()->current_team_id==1)
-                <x-jet-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
-                    {{ __('Administrativo') }}
+                <x-jet-nav-link href="{{ route('curriculos') }}" :active="request()->routeIs('curriculos')">
+                    {{ __('Área Administrativa') }}
                 </x-jet-nav-link>
+                
                 @else
                 <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                     {{ __('Painel do currículo') }}

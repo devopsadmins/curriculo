@@ -7,7 +7,7 @@
     </x-slot>
     <x-slot name="form">
         <div class="col-span-12 sm:col-span-4">
-            <x-jet-label for="name" value="{{ __('Telefone') }}" />
+            <x-jet-label for="name" value="{{ __('Telefone2') }}" />
             <x-jet-input id="name" type="text" class="mt-1 block w-full" value="{{$this->dados->telefone}}"  autocomplete="name" />
             <x-jet-input-error for="name" class="mt-2" />
         </div>

@@ -20,8 +20,8 @@ class CurriculoProfile extends Component {
         if (!$this->dados) {
             $curriculo = new Curriculo();
             $users = Auth::id();
-            $curriculo->nome=Auth::user()->name;
-            $curriculo->email=Auth::user()->email;
+            $curriculo->nome_curriculo=Auth::user()->name;
+            $curriculo->email_curriculo=Auth::user()->email;
             $curriculo->users =Auth::id();
             $curriculo->save();
             

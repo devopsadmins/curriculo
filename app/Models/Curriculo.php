@@ -10,8 +10,8 @@ class Curriculo extends Model {
     public $timestamps = false;
     protected $fillable = [
         'id',
-        'nome',
-        'email',
+        'nome_curriculo',
+        'email_curriculo',
         'telefone',
         'profissao',
         'experiencia',
