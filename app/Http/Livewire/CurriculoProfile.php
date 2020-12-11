@@ -20,11 +20,11 @@ class CurriculoProfile extends Component {
         if (!$this->dados) {
             $curriculo = new Curriculo();
             $users = Auth::id();
-            $curriculo->nome_curriculo=Auth::user()->name;
-            $curriculo->email_curriculo=Auth::user()->email;
-            $curriculo->users =Auth::id();
+            $curriculo->nome_curriculo = Auth::user()->name;
+            $curriculo->email_curriculo = Auth::user()->email;
+            $curriculo->users = Auth::id();
             $curriculo->save();
-            
+
             $this->dados = Curriculo::where('users', auth()->id())->first();
         }
         $this->cidade = Cidades::where('ativo', 1)->get();
@@ -32,7 +32,11 @@ class CurriculoProfile extends Component {
         $this->escolaridade = Escolaridades::where('ativo', 1)->orderBy('idescolaridade', 'asc')->get();
         $this->idioma = \App\Models\Idiomas::where('ativo', 1)->get();
         $this->idiomanivel = \App\Models\IdiomasNivel::where('ativo', 1)->get();
-        return view('livewire.curriculo');
+        return view('livewire.curriculo', ['dados' => $this->dados]);
+    }
+
+    public function update() {
+        
     }
 
 }

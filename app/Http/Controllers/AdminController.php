@@ -10,6 +10,7 @@ use App\Models\Idiomas;
 use App\Models\Cidades;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller {
 
@@ -27,22 +28,32 @@ class AdminController extends Controller {
 
     public function show() {
 
+        $id = Auth::id();
+        $data = \App\Models\VwCurriculos::where('users', $id)->first();
+        $user = User::where('id', $id)->first();
+        view()->share('user', $user);
+
         $this->filtros();
 
         if (Auth::user()->current_team_id == 1)
             return View("admin.admin", ["dados" => $this]);
         else
-            return redirect('admin');
+            return redirect('curriculo');
     }
 
     public function perfis() {
+
+        $id = Auth::id();
+        $data = \App\Models\VwCurriculos::where('users', $id)->first();
+        $user = User::where('id', $id)->first();
+        view()->share('user', $user);
 
         $this->filtros();
 
         if (Auth::user()->current_team_id == 1)
             return View("admin.admin");
         else
-            return redirect('admin');
+            return redirect('curriculo');
     }
 
     public function users(Request $request) {
@@ -55,9 +66,18 @@ class AdminController extends Controller {
         if ($area != 0)
             $filtro .= " AND areainteresse_id = " . $area;
         if ($escola != 0)
-            $filtro .= " AND escolaridade_id = " . $escola;
-        if ($idioma != 0)
-            $filtro .= " AND idioma_id = " . $idioma;
+            $filtro .= " AND escolaridade_id >= " . $escola;
+        if ($idioma != 0) {
+
+            $curIdiomas = \App\Models\CurriculoIdioma::where('idioma_id', $idioma)->get();
+            $idiomas = "0";
+            if (count($curIdiomas) > 0) {
+                foreach ($curIdiomas as $curi) {
+                    $idiomas .= "," . $curi->curriculo_id;
+                }
+            }
+            $filtro .= " AND id in (" . $idiomas . ")";
+        }
         if ($cidade != 0)
             $filtro .= " AND cidade_id = " . $cidade;
 
@@ -81,9 +101,20 @@ class AdminController extends Controller {
     }
 
     public function curriculo($id) {
+        $id2 = Auth::id();
+        $data = \App\Models\VwCurriculos::where('users', $id2)->first();
+        $users = User::where('id', $id2)->first();
+        view()->share('user', $users);
+
         $data = \App\Models\VwCurriculos::where('id', $id)->first();
-        $user = User::where('id',$data->users)->first();
-        return View("admin.curriculo", ["data" => $data, "user" => $user]);
+        $user = User::where('id', $data->users)->first();
+        $idiomas = DB::table('vw_idiomas')->where("curriculo_id", $id)->get();
+        return View("admin.curriculo",
+                [
+                    "data" => $data,
+                    "user" => $user,
+                    "idiomas" => $idiomas]
+        );
     }
 
     public function upperAdmin($id) {
@@ -91,4 +122,5 @@ class AdminController extends Controller {
         $data->current_team_id = !$data->current_team_id;
         $data->save();
     }
+
 }

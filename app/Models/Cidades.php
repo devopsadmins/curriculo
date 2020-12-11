@@ -9,6 +9,7 @@ class Cidades extends Model {
 
     public $timestamps = false;
     public $table = "cidade";
+    public $primaryKey  = "idcidade";
 
     use HasFactory;
 }

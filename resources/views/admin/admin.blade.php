@@ -18,7 +18,7 @@
                                 <form method="get" action="{{route('admin.users')}}" class="form-horizontal">
                                     <div class="widget-content widget-content-area row">
                                         @csrf
-                                        <div class="col-3">
+                                        <div class="col-2">
                                             <select class="form-control  basic" id="select_area">
                                                 <option selected="selected" value="0">Selecione a Área de Interesse</option>
                                                 @foreach($dados->areas as $dado)
@@ -26,7 +26,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-2">
                                             <select class="form-control  basic" id="select_escolaridade">>
                                                 <option selected="selected" value="0">Selecione a Escolaridade</option>
                                                 @foreach($dados->escolaridade as $dado)
@@ -66,7 +66,7 @@
                                             <th>Email</th>
                                             <th>Telefone</th>
                                             <th>Cidade</th>
-                                            <th>Escolaridade</th>
+                                            <th>Área</th>
                                             <th width="100px">Ações</th>
                                         </tr>
                                     </thead>
@@ -121,7 +121,7 @@ $(function () {
                 {data: 'email', name: 'email'},
                 {data: 'telefone', name: 'telefone'},
                 {data: 'cidadenome', name: 'cidadenome'},
-                {data: 'escolaridadenome', name: 'escolaridadenome'},
+                {data: 'areainteressenome', name: 'areainteressenome'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });

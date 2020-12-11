@@ -1,4 +1,4 @@
-<x-jet-form-section submit="/curriculo">
+<x-jet-form-section submit="{{route('curriculo.update')}}">
     <x-slot name="title">
         {{ __('Currículo') }}
     </x-slot>
@@ -7,14 +7,14 @@
     </x-slot>
     <x-slot name="form">
         <div class="col-span-12 sm:col-span-4">
-            <x-jet-label for="name" value="{{ __('Telefone2') }}" />
-            <x-jet-input id="name" type="text" class="mt-1 block w-full" value="{{$this->dados->telefone}}"  autocomplete="name" />
+            <x-jet-label for="telefone" value="{{ __('Telefone') }}" />
+            <x-jet-input id="telefone" type="text" name="telefone" class="mt-1 block w-full" value="{{$this->dados->telefone}}"  autocomplete="telefone" />
             <x-jet-input-error for="name" class="mt-2" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="cidade" value="{{ __('Cidade') }}" />
-            <select name="" id="" class="form-select rounded-md shadow-sm mt-1 block w-full">
+            <select name="cidade" id="cidade" class="form-select rounded-md shadow-sm mt-1 block w-full">
                 <option value="0">Selecione</option>
                 @foreach($this->cidade as $row)
                 <option value="{{ $row->idcidade }}">{{ $row->cidadenome }}</option>
@@ -22,7 +22,7 @@
             </select>
             <x-jet-input-error for="cidade" class="mt-2" />
         </div>
-        <div class="col-span-6 sm:col-span-4" id="cidade_outra">
+        <div class="col-span-6 sm:col-span-4" id="cidade_outra" style="display: none">
             <x-jet-label for="cidade_nome" value="{{ __('Cidade Nome') }}" />
             <x-jet-input name="cidade_nome" id="cidade_nome" type="text" class="mt-1 block w-full" value="{{$this->dados->cidade_nome}}" />
             <x-jet-input-error for="cidade_nome" class="mt-2" />
@@ -50,6 +50,11 @@
                 @endforeach
             </select>
             <x-jet-input-error for="area_interesse" class="mt-2" />
+        </div>
+        <div class="col-span-6 sm:col-span-4" id="area_interesse_outra" style="display: none">
+            <x-jet-label for="area_interesse_nome" value="{{ __('Outra Área de Interesse') }}" />
+            <x-jet-input name="area_interesse_nome" id="area_interesse_nome" type="text" class="mt-1 block w-full" value="{{$this->dados->cidade_nome}}" />
+            <x-jet-input-error for="area_interesse_nome" class="mt-2" />
         </div>
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="area_interesse_experiencia" value="{{ __('Experiência na área de interesse') }}" />

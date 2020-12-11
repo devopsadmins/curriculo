@@ -6,43 +6,119 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Curriculo;
-
+use App\Models\Cidades;
+use App\Models\AreasInteresse;
+use App\Models\Escolaridades;
+use App\Models\User;
+use App\Models\Idiomas;
+use App\Models\IdiomasNivel;
+use App\Models\CurriculoIdioma;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CurriculoController extends Controller {
 
-    public function show($id_logado = '') {
-        if (Auth::user()->current_team_id == 1)
-            return redirect('admin');
-        return View('curriculo');
+    public $dados;
+    public $cidade;
+
+    public function show() {
+
+        $id = Auth::id();
+        $data = \App\Models\VwCurriculos::where('users', $id)->first();
+        $user = User::where('id', $id)->first();
+        view()->share('user', $user);
+        $cidade = Cidades::where('ativo', 1)->get();
+        $interesse = AreasInteresse::where('ativo', 1)->orderBy('idareainteresse', 'asc')->get();
+        $escolaridade = Escolaridades::where('ativo', 1)->orderBy('idescolaridade', 'asc')->get();
+        $idioma = \App\Models\Idiomas::where('ativo', 1)->get();
+        $idiomanivel = \App\Models\IdiomasNivel::where('ativo', 1)->get();
+
+        if (isset($data->id)) {
+            $cur_idiomas = CurriculoIdioma::where('curriculo_id', '=', $data->id)->get();
+            if (count($cur_idiomas) == 0) {
+                $cur_idiomas = new CurriculoIdioma();
+                $cur_idiomas->curriculo_id = $data->id;
+                $cur_idiomas->idioma_id = 0;
+                $cur_idiomas->nivel_id = 0;
+                $cur_idiomas->save();
+            }
+            $cur_idiomas = CurriculoIdioma::where('curriculo_id', '=', $data->id)->get();
+        } else {
+            $data = new Curriculo();
+            $data->idioma_id = 0;
+            $data->users = Auth::id();
+            $data->save();
+            $data = \App\Models\VwCurriculos::where('users', $id)->first();
+            $cur_idiomas = new CurriculoIdioma();
+            $cur_idiomas->curriculo_id = $data->id;
+            $cur_idiomas->idioma_id = 0;
+            $cur_idiomas->nivel_id = 0;
+            $cur_idiomas->save();
+            $cur_idiomas = CurriculoIdioma::where('curriculo_id', '=', $data->id)->get();
+        }
+        return View("curriculo", [
+            "dados" => $data,
+            "user" => $user,
+            'cidade' => $cidade,
+            'interesse' => $interesse,
+            'escolaridade' => $escolaridade,
+            'idioma' => $idioma,
+            'idiomanivel' => $idiomanivel,
+            'cur_idiomas' => $cur_idiomas
+        ]);
     }
 
-    public function edit($id_logado = '') {
-        
-         if (Auth::user()->current_team_id == 1)
-             return redirect('admin');
-        
-        $id_logado = Auth::id();
-        $model = Curriculo::where('users', auth()->id())->get();
+    public function update(Request $request) {
+        $curriculo = Curriculo::where('users', Auth::id())->first();
+        // $arquivo = "";
+        if (isset($request->curriculo)) {
+            $file = $request->file('curriculo');
+            $destinationPath = 'curriculos';
+            $arquivo = Storage::disk("public")->put("curriculos/" . $curriculo->id, $request->file("curriculo"));
 
-        return View('curriculo', ['id' => $id_logado, 'dados' => $model]);
-    }
+            if (Storage::disk("public")->exists($curriculo->curriculo))
+                Storage::disk("public")->delete($curriculo->curriculo);
+        }
 
-    public function update(Request $request, $id) {
-        $curriculo = Curriculo::findOrfail($id);
+//         if ($arquivo != "" && $curriculo->arquivo != $arquivo) {
+//            $curriculo->update([
+//                'curriculo' => $arquivo,
+//            ]);
+//        }
+
+        $curriculo = Curriculo::where('users', Auth::id());
+
+
         $curriculo->update([
-            'nome_curriculo' => $request->nome,
-            'email_curriculo' => $request->email,
             'telefone' => $request->telefone,
-            'profissao' => $request->profissao,
-            'experiencia' => $request->experiencia,
-            'idioma' => $request->idioma,
-            'site' => $request->site,
-            'github' => $request->github,
-            'linkedin' => $request->linkedin,
-            'linguagens' => $request->linguagens,
+            'cidade_id' => $request->cidade,
+            'cidade_nome' => $request->cidade_nome,
+            'idade' => $request->idade,
+            'areainteresse_id' => $request->area_interesse,
+            'areainteresse_nome' => $request->area_interesse_nome,
+            'experiencia' => $request->area_interesse_experiencia,
+            'escolaridade_id' => $request->escolaridade,
+            'curriculo' => $arquivo,
+            'idioma_nome' => $request->idioma_outra,
         ]);
 
-        return redirect()->route('curriculo.index')
+        $curriculo = Curriculo::where('users', Auth::id())->first();
+
+        DB::table('curriculo_idioma')->where('curriculo_id', $curriculo->id)->delete();
+
+        if (isset($request->idioma)) {
+            foreach ($request->idioma as $idioma) {
+                $curriculoIdioma = new CurriculoIdioma();
+                $nivel = "idiomanivel_" . $idioma;
+
+                $curriculoIdioma->curriculo_id = $curriculo->id;
+                $curriculoIdioma->idioma_id = $idioma;
+                $curriculoIdioma->nivel_id = $request->$nivel;
+
+                $curriculoIdioma->save();
+            }
+        }
+        return redirect('curriculo')
                         ->with('success', 'Curriculo atualizado com sucesso...');
     }
 

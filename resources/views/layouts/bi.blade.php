@@ -28,6 +28,7 @@
         <link href="/theme/plugins/sweetalerts/sweetalert2.min.css" rel="stylesheet" type="text/css" />
         <link href="/theme/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
         <link href="/theme/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/theme/assets/css/forms/theme-checkbox-radio.css">
 
         <link rel="icon" href="/img/flaticon-180x180.png" />
         @yield("css")
@@ -141,11 +142,41 @@
                                 </div>
                             </a>
                             <ul class="collapse submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
-                                <li class="active">
-                                    <a href="{{ route('curriculos') }}" :active="request()->routeIs('curriculos')">
+                                @if ($user->current_team_id==1)
+                                <li class="@if (request()->routeIs('curriculos')) 
+                                    active
+                                    @endif">
+
+                                    <a href="{{ route('curriculos') }}" >
                                         {{ __('Ver currículos') }}
                                     </a>
                                 </li>
+                                <li class="@if (request()->routeIs('admin.areas')) 
+                                    active
+                                    @endif">
+
+                                    <a href="{{ route('admin.areas') }}" >
+                                        {{ __('Áreas de Interesse') }}
+                                    </a>
+                                </li>
+                                <li class="@if (request()->routeIs('admin.cidades')) 
+                                    active
+                                    @endif">
+
+                                    <a href="{{ route('admin.cidades') }}" >
+                                        {{ __('Cidades') }}
+                                    </a>
+                                </li>
+                                @else
+                                <li class="@if (request()->routeIs('dashboard')) 
+                                    active
+                                    @endif"
+                                    >
+                                    <a href="{{ route('dashboard') }}" >
+                                        {{ __('Editar currículo') }}
+                                    </a>
+                                </li>
+                                @endif
 
                             </ul>
                         </li>

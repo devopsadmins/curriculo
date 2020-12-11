@@ -4,6 +4,7 @@
 <!--  END CUSTOM STYLE FILE  -->
 @endsection
 <x-bi-layout>
+
     <div id="content" class="main-content">
         <div class="layout-px-spacing">
             <div class="row layout-spacing">
@@ -58,18 +59,17 @@
                     <div class="skills layout-spacing ">
                         <div class="widget-content widget-content-area">
                             <h3 class="">Idiomas</h3>
-                            <!--                            <div class="progress br-30">
-                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>PHP</span> <span>25%</span> </div></div>
-                                                        </div>
-                                                        <div class="progress br-30">
-                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Wordpress</span> <span>50%</span> </div></div>
-                                                        </div>
-                                                        <div class="progress br-30">
-                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>Javascript</span> <span>70%</span> </div></div>
-                                                        </div>
-                                                        <div class="progress br-30">
-                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>jQuery</span> <span>60%</span> </div></div>
-                                                        </div>-->
+
+                            @foreach($idiomas as $idioma)
+                            <div class="progress br-30">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: {{ 20 * $idioma->nivel_id }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div class="progress-title"><span>{{$idioma->idiomanome}}</span> <span>{{$idioma->nivelidioma}}</span> </div></div>
+                            </div>
+                            @endforeach 
+                            @if (isset($data->idioma_nome))
+                            <div class="">
+                                Outros idiomas : {{$data->idioma_nome}}
+                            </div>
+                            @endif
 
                         </div>
                     </div>
@@ -84,16 +84,22 @@
                                 <div class="row">
 
                                     <div class="col-12 col-xl-6 col-lg-12 mb-xl-5 mb-5 ">
-
+                                        @if ($data->curriculo!="")
                                         <div class="d-flex b-skills">
                                             <div>
                                             </div>
                                             <div class="">
                                                 <h5>Download currículo</h5>
-                                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse eu fugiat nulla pariatur.</p>
+                                                <a href="/storage/{{$data->curriculo}}" target="_blank">Clique para Download</a>
                                             </div>
                                         </div>
-
+                                        @else
+                                        <div class="d-flex b-skills">
+                                            <div>
+                                                Sem Upload de currículo
+                                            </div>
+                                        </div>
+                                        @endif
                                     </div>
 
 

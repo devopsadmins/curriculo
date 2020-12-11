@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Curriculo extends Model {
 
     public $timestamps = false;
+    public $primaryKey = 'id';
     protected $fillable = [
         'id',
         'nome_curriculo',
