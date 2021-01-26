@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "007ab05411283bed5fd3481a81060436",
+    "content-hash": "fa6062c180c3ea80a9cc5c42aca3d2bc",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1811,6 +1811,60 @@
             ],
             "description": "Arquivos de linguagem em Português do Brasil (pt-BR) para Laravel >= 5.6",
             "time": "2020-09-04T09:02:44+00:00"
+        },
+        {
+            "name": "mehradsadeghi/laravel-crud-generator",
+            "version": "v0.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mehradsadeghi/laravel-crud-generator.git",
+                "reference": "c333021e6ce9e440bf2fa1ff7be61361e780aab0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mehradsadeghi/laravel-crud-generator/zipball/c333021e6ce9e440bf2fa1ff7be61361e780aab0",
+                "reference": "c333021e6ce9e440bf2fa1ff7be61361e780aab0",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.*|6.*|7.*|8.*",
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mehradsadeghi\\CrudGenerator\\CrudGeneratorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mehradsadeghi\\CrudGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mehrad Sadeghi",
+                    "email": "mehrad177@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Generate CRUD for your laravel application like a breeze",
+            "homepage": "https://github.com/mehradsadeghi/laravel-crud-generator",
+            "keywords": [
+                "crud",
+                "crud-generator",
+                "laravel-crud-generator"
+            ],
+            "time": "2020-09-19T05:46:07+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",

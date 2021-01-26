@@ -4,12 +4,17 @@
     </x-slot>
     <x-slot name="description">
         {{ __('Mantenha seus dados atualizados para melhor exposição do seu currículo)') }}
-    </x-slot>
+    </x-slot> 
     <x-slot name="form">
+        <div class="col-span-12 sm:col-span-4">
+            <x-jet-label for="telefone" value="{{ __('CPF') }}" />
+            <x-jet-input id="cpf" type="text" name="cpf" class="mt-1 block w-full" value="{{$this->dados->cpf}}"  autocomplete="cpf" disabled/>
+            <x-jet-input-error for="cpf" class="mt-2" />
+        </div> 
         <div class="col-span-12 sm:col-span-4">
             <x-jet-label for="telefone" value="{{ __('Telefone') }}" />
             <x-jet-input id="telefone" type="text" name="telefone" class="mt-1 block w-full" value="{{$this->dados->telefone}}"  autocomplete="telefone" />
-            <x-jet-input-error for="name" class="mt-2" />
+            <x-jet-input-error for="telefone" class="mt-2" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">

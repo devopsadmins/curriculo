@@ -29,8 +29,9 @@
         <link href="/theme/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
         <link href="/theme/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/theme/assets/css/forms/theme-checkbox-radio.css">
-
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <link rel="icon" href="/img/flaticon-180x180.png" />
+        <link rel="stylesheet" type="text/css" href="/theme/assets/css/forms/switches.css">
         @yield("css")
 
         <link rel="stylesheet" type="text/css" href="/curriculo.css">
@@ -99,7 +100,7 @@
             </header>
         </div>
         <!--  END NAVBAR  -->
-
+        
         <!--  BEGIN NAVBAR  -->
         <div class="sub-header-container">
             <header class="header navbar navbar-expand-sm">
@@ -118,14 +119,15 @@
             </header>
         </div>
         <!--  END NAVBAR  -->
-
+        
         <!--  BEGIN MAIN CONTAINER  -->
-        <div class="main-container" id="container">
-
+        <div class="main-container"  id="container">
+        
             <div class="overlay"></div>
             <div class="search-overlay"></div>
 
             <!--  BEGIN SIDEBAR  -->
+
             <div class="sidebar-wrapper sidebar-theme">
 
                 <nav id="sidebar">
@@ -189,6 +191,7 @@
                 </nav>
 
             </div>
+        
             <!--  END SIDEBAR  -->
 
             <!--  BEGIN CONTENT AREA  -->
@@ -298,5 +301,6 @@ function insercao() {
         <script src="/theme/plugins/sweetalerts/custom-sweetalert.js"></script>
         <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
         @yield("scripts")
+       
     </body>
 </html>

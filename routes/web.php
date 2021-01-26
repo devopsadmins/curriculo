@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CurriculoController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AreaInteresseController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +25,9 @@ Route::get('/admin/curriculo/{id}',[AdminController::class,'curriculo'])->name('
 Route::post('/admin/upperAdmin/{id}',[AdminController::class,'upperAdmin'])->name('admin.upperAdmin');
 
 Route::get('/admin/cidades',[AdminController::class,'show'])->name('admin.cidades');
-Route::get('/admin/areas',[AdminController::class,'show'])->name('admin.areas');
+Route::get('/admin/areas',[AreaInteresseController::class,'show'])->name('admin.areas');
+Route::get('/admin/areas/{id}',[AreaInteresseController::class,'item'])->name('admin.area');
+Route::post('/admin/areaslist',[AreaInteresseController::class,'list'])->name('admin.areaslist');
 
 Route::post('/curriculo', [CurriculoController::class, 'update'])->name('curriculo.update');
 Route::get('/curriculo', [CurriculoController::class, 'show'])->name('curriculo.index');

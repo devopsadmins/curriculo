@@ -21,7 +21,13 @@ class Curriculo extends Model {
         'github',
         'linkedin',
         'linguagens',
-        'users'
+        'users',
+        'pretensao',
+        'whatsapp',
+        'cnh',
+        'pcd',
+        'estagio',
+        'nascimento',
     ];
 
     use HasFactory;

@@ -19,6 +19,8 @@
         <link rel="icon" href="/img/flaticon-180x180.png" />
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>    
+        <link rel="stylesheet" type="text/css" href="/theme/assets/css/forms/switches.css">
+        
 
     </head>
     <body class="font-sans antialiased">

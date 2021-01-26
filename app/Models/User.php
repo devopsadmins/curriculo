@@ -11,8 +11,8 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasTeams;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable implements MustVerifyEmail {
+
     use HasApiTokens;
     use HasFactory;
     use HasTeams;
@@ -27,6 +27,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'cpf',
         'email',
         'password',
     ];
@@ -60,4 +61,5 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
 }

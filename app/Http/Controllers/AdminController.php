@@ -62,6 +62,28 @@ class AdminController extends Controller {
         $escola = $request->input('escola');
         $idioma = $request->input('idioma');
         $cidade = $request->input('cidade');
+        $pcd = $request->input('pcd');
+        $estagio = $request->input('estagio');
+        $cnh = substr($request->input('cnh'), 0, - 1);
+        $pretencao_min = $request->input('pretencao_min');
+        $pretencao_max = $request->input('pretencao_max');
+
+        if ($cnh != "") {
+            $filtro .= " AND ( ";
+            foreach (explode(",", $cnh) as $c) {
+                $filtro .= " cnh like ('%" . $c . "%') OR ";
+            }
+            $filtro .= " 0>1 ) ";
+        }
+
+        if ($pcd == 1) {
+            $filtro .= " AND PCD = 1 ";
+        }
+        if ($estagio == 1) {
+            $filtro .= " AND estagio = 1 ";
+        }
+        $filtro .= " AND pretensao between " . $pretencao_min . " AND " . $pretencao_max . " ";
+
 
         if ($area != 0)
             $filtro .= " AND areainteresse_id = " . $area;
@@ -80,6 +102,8 @@ class AdminController extends Controller {
         }
         if ($cidade != 0)
             $filtro .= " AND cidade_id = " . $cidade;
+
+        $filtro .= ' AND cidade_id > 0';
 
         if (Auth::user()->current_team_id == 1) {
             if ($request->ajax()) {
