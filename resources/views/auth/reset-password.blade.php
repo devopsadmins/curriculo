@@ -6,9 +6,9 @@
 
         <div class="container">
             <x-jet-validation-errors class="mb-12" />
-            <h2>Cadastre-se</h2>
+            <h2>Atualize sua senha</h2>
 
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('password.update') }}">
                 @csrf
 
                 <input type="hidden" name="token" value="{{ $request->route('token') }}">
@@ -17,7 +17,7 @@
                     <x-jet-label for="email" value="{{ __('Email') }}" />
                     <x-jet-input id="email" class="block mt-1 w-full form-control" type="email" name="email" :value="old('email', $request->email)" required autofocus />
                 </div>
-
+                <x-jet-input type="hidden" name="name" :value="old('name',$request->name)" />
                 <div class="mt-4">
                     <x-jet-label for="password" value="{{ __('Password') }}" />
                     <x-jet-input id="password" class="block mt-1 w-full form-control" type="password" name="password" required autocomplete="new-password" />

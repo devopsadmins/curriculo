@@ -9,6 +9,7 @@
             <file>file:/C:/Projetos/curriculo/resources/views/auth/verify-email.blade.php</file>
             <file>file:/C:/Projetos/curriculo/resources/views/layouts/guest.blade.php</file>
             <file>file:/C:/Projetos/curriculo/.env</file>
+            <file>file:/C:/Projetos/curriculo/app/Http/Controllers/CurriculoController.php</file>
         </group>
     </open-files>
 </project-private>
